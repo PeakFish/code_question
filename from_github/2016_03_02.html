@@ -1,0 +1,39 @@
+<meta charset="utf-8" />
+<!-- https://github.com/nunnly/everycode/issues/43#issuecomment-191125066 -->
+<script>
+//你是一家快餐店的老板，每天营业前，你需要根据采购的食材来确定今天能够做多少份快餐：
+// 炒蛋饭食谱
+var fryRice = {
+    rice: 1,
+    egg: 1,
+    meat: 2
+}
+
+// 食材
+var material = {
+    rice: 10,     // 100
+    egg: 10,     // 100
+    meat: 5     // 50
+}
+
+function check (food, material) {
+    // 请完成这个代码
+    var sum = 0;
+    function reducematerial(material){
+      if(material.rice < 1 || material.egg < 1 || material.meat < 2){
+        return;
+      }else{
+        ++sum;
+        material.rice -= 1;
+        material.egg -= 1;
+        material.meat -= 2;
+        reducematerial(material);
+      }
+    }
+    reducematerial(material);
+    return {sum: sum, remnants: material};
+}
+
+console.log(check(fryRice, material)); 
+// 结果： {sum: 2, remnants: {rice: 8, egg: 8, meat: 1}}
+</script>
