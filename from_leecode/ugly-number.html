@@ -1,0 +1,22 @@
+<meta charset="utf-8" />
+<!--
+https://leetcode.com/problems/ugly-number/
+看网上 关于 ugly number 好像有两个版本
+关于丑数的定义都一样
+一个是 leecode 的 判断一个数是否是 ugly number
+另一个是 找到 第 15000 个 ugly number
+-->
+<script>
+//discuss 里面最hot的code
+var isUgly = function(num){
+  for (var p of [2, 3, 5]){
+    //两个乘数是没有先后顺序的，所以...
+    while (num && num % p == 0){//如果 num 不是0 并且 num 可以整除 p 那么就除等于 p， 依次 来判断 2 3 5 三个数。
+      num /= p;
+    }
+  }
+  return num == 1;//除到最后如果num等于1证明开始的num被2 3 5整除了。所以是 ugly number。
+};
+
+console.log(isUgly(15));
+</script>
