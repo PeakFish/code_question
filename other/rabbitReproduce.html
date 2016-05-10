@@ -1,0 +1,83 @@
+<meta charset="utf-8" />
+<!--
+假设
+1.兔子不会死
+2.允许近亲结婚
+3.兔子三个月长成熟，当月就生下兔子，兔子一个月生一窝
+4.每次下的兔子都是龙凤胎
+
+第一个月
+    1    一老
+第二个月
+    1    一老
+第三个月
+    2    一老 一小
+第四个月
+    3    一老两小
+
+-->
+<script>
+
+/*
+
+[1]
+[2]
+[3, 1]
+[4, 2, 1]
+[5, 3, 2, 1, 1]
+[6, 4, 3, 2, 2, 1, 1, 1]
+
+*/
+
+
+function rabbitReproduce(base, month){
+
+  var pregnancyAge = 3;
+
+  var rabbit = [];
+
+  //构造数据这是第0个月的数据
+  while(base--){
+
+    rabbit[base] = 0;
+
+  }
+
+  for (var i = 0; i < month; ++ i){
+
+    var sub = [];
+
+    for(var j = 0, len = rabbit.length; j < len; ++ j){
+
+      //++rabbit[j];
+      if(++rabbit[j] >= pregnancyAge){
+        sub.push(1);
+      }
+
+    }
+
+    rabbit = rabbit.concat(sub);
+
+  }
+
+  var old = 0;
+  var young = 0;
+
+  for(var i = 0, len = rabbit.length; i < len; ++ i){
+
+    if(rabbit[i] >= pregnancyAge){
+      old++;
+    }else{
+      young++;
+    }
+
+  }
+
+  return {
+    old: old,
+    young: young
+  };
+
+}
+
+</script>
