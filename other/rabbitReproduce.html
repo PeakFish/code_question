@@ -87,4 +87,22 @@ function rabbitReproduce(base, month){
 rabbitReproduce(1, 12);
 
 
+var arr = [];
+function rabbitReproduce2(n){
+  if(n == 1){
+    return 1;
+  }else if(n == 2){
+    return 1;
+  }else{
+    if(arr[n]){
+      return arr[n];
+    }else{
+      arr[n] = rabbitReproduce2(n - 1) + rabbitReproduce2(n - 2);
+      return arr[n];
+    }
+  }
+}
+
 </script>
+
+原来是斐波那契数列哎。
