@@ -1,0 +1,55 @@
+<script type="text/javascript">
+function answer(area){
+	var arr = [];
+
+	function p(input){
+		var i = 0;
+		while(1){
+			i++;
+			if((i*i) > input){
+				return (i-1) * (i-1);
+			}
+		}
+	}
+
+
+	function c(input){
+
+		var n = p(input);
+		arr.push(n);
+		var less = input - n;
+
+		if(less == 0){
+			return arr;
+		}else{
+			return c(less);
+		}
+
+	}
+
+	return c(area);
+
+}
+</script>
+def answer(area):
+    # your code here
+    arr = []
+
+    def p(inp):
+		i = 0
+		while(1):
+			i += 1
+			if ((i*i) > inp):
+				return (i-1) * (i-1)
+
+    def c(inp):
+        n = p(inp)
+        arr.append(n)
+        less = inp - n
+
+        if less == 0:
+            return arr
+        else :
+            return c(less)
+
+    return c(area)

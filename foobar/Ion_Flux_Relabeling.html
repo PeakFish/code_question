@@ -1,0 +1,128 @@
+<script>
+
+    function Node(val, lc, rc){
+        this.val = val;
+        this.lc = lc;
+        this.rc = rc;
+    }
+
+
+
+    function gTree(layer, arr){
+
+        var output = [];
+        var i = 0;
+
+        var l = layer;
+
+        l -= 1;
+        var treeroot = new Node(0, null, null);
+
+        var times = Math.pow(2, layer) - 1;
+        //构建二叉树
+        while(l > 0){
+            l -= 1;
+            add(treeroot);
+        }
+        //后续添加数字
+        postOrderWrite(treeroot);
+
+console.log('后续添加完', treeroot);
+
+        var j = 0;
+        while(j < arr.length){
+            output.push(match(arr[j]));
+            j += 1;
+        }
+
+
+console.log('结果数组', output);
+
+
+/*        function getOne(n, num){
+            if(n.lc == num || n.rc == num){
+                console.error(n.val);
+                return n.val;
+            }else{
+                getOne(n.lc);
+                getOne(n.rc);
+            }
+        }
+console.log(getOne(treeroot, 5));
+*/
+// console.log(treeroot);
+/*        //读取
+        for( k in arr ){
+            match();
+        }
+*/
+
+
+
+
+        function add(n){
+            if(n.lc){
+                add(n.lc);
+            }else{
+                n.lc = new Node(0, null, null);
+            }
+            if(n.rc){
+                add(n.rc);
+            }else{
+                n.rc = new Node(0, null, null);
+            }
+        }
+
+        function postOrderWrite(n){
+            if(n){
+                postOrderWrite(n.lc);
+                postOrderWrite(n.rc);
+                //putchar();
+                n.val = (i += 1);
+            }
+        }
+
+
+        function match(num){
+
+            var topVal = -1;
+
+            getOne(treeroot);
+
+            function getOne(n){
+                if(n.lc && n.rc){console.log(n.lc && n.lc.val, n.rc && n.rc.val, num);
+                    if(n.lc.val == num || n.rc.val == num){
+                        topVal = n.val;
+                    }else{
+                        getOne(n.lc);
+                        getOne(n.rc);
+                    }
+                }
+            }
+
+            return topVal;
+
+        }
+
+
+
+
+
+
+
+/*
+        function g(){
+            t -= 1;
+            if(t == 0){
+                return new Node(0, 0, 0);
+            }else{
+                return new Node(0, g(), g());
+            }
+        }
+*/
+    }
+
+
+
+
+</script>
