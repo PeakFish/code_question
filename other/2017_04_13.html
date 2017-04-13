@@ -1,0 +1,58 @@
+<meta charset="utf-8" />
+<!--  -->
+<script>
+
+	var str = 'user.name.first=Peak&user.name.last=Fish&user.favorite=music&q.w.e.r.t.y.u.i.o=123456&q.b=1&q.c=2&q.f=8';
+
+	console.log(answer(str));
+
+	function answer(s){
+		var o = {};
+		s.split('&').forEach((v) => {
+			var name = v.split('=')[0];
+			var value = v.split('=')[1];
+			var aKeys = name.split('.');
+			var _o_ = o;
+			aKeys.forEach((v, i, a) => {
+				if(i == (a.length - 1)){
+					_o_[v] = value;
+				}else{
+					if(!_o_[v]){
+						_o_[v] = {};
+					}
+					_o_ = _o_[v];
+				}
+			});
+		});
+		return o;
+	}
+
+	//answer2不能输出想要的结果
+	function answer2(s){
+		var o = {};
+		s.split('&').forEach((v) => {
+			var name = v.split('=')[0];
+			var value = v.split('=')[1];
+			var aKeys = name.split('.');
+			var _o_ = o;
+			o = process(aKeys, value);
+		});
+		return o;
+
+
+		function process(arr, val){
+			if(arr.length == 1){//不考虑错误输入0的情况先
+				var name = arr.shift();
+				return {[name]: val};
+			}else{
+				var name = arr.shift();
+				return {[name]: process(arr, val)};
+			}
+		}
+
+
+
+	}
+
+
+</script>
