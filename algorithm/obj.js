@@ -14,36 +14,47 @@ function flat(keys, obj) {
 flat([], obj);
 
 
-// 反向擦操作（未完成）
+// 反向擦操作
 
 const a = {
-  "a": 1, "b.c": 2,
-  "b.d.e": 3, "b.d.f": 4,
-  "g.0": 5, "g.1": 6, "g.2.h": 7
+  a: 1,
+  'b.c': 2,
+  'b.d.e': 3,
+  'b.d.f': 4,
+  'g.0': 5,
+  'g.1': 6,
+  'g.2.h': 7
 }
 
 const nest = (obj) => {
-  console.log(obj);
+  // console.log(obj)
   const rto = {}
 
-  for (var key in obj) {
-  	var keyArr = key.split('.');
-    let current = rto;
+  for (const key in obj) {
+    const keyArr = key.split('.')
+    let current = rto
 
-    for (var i = 0; i < keyArr.length; ++i) {
-      if(i === key.length - 1) {
-        current[key] = obj[key]
+    for (let i = 0; i < keyArr.length; ++i) {
+      const cKey = keyArr[i]
+      //  最后一个
+      if (i === keyArr.length - 1) {
+        current[cKey] = obj[key]
       } else {
-        if (!current[key]) {
-          if(+keyArr[i + 1] === +keyArr[i + 1]) {
-            current[key]=[]
+        if (!current[cKey]) {
+          // debugger
+          // NaN 不等于 NaN
+          if (+keyArr[i + 1] === +keyArr[i + 1]) {
+            current[cKey] = []
+          } else {
+            current[cKey] = {}
           }
-        } else {
-          current[key] = {}
         }
-        current = current[key];
+        // 保存当前对象 继续向下面取值
+        current = current[cKey]
       }
     }
-
   }
+  return rto
 }
+nest(a)
+
